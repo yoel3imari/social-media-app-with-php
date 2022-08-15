@@ -10,7 +10,7 @@ $routes = new RouteCollection();
 // Pages Routing
 
 $routes->add(
-    'home',
+    'root',
     new Route(
         constant('URL_SUBFOLDER') . '/',
         array(
@@ -34,21 +34,9 @@ $routes->add(
 );
 
 $routes->add(
-    'profile',
-    new Route(
-        constant('URL_SUBFOLDER') . '/profile',
-        array(
-            'controller' => 'PageController',
-            'method'=>'profile'
-        ),
-        array('username' => '^[A-Za-z0-9_]{1,9}$')
-    )
-);
-
-$routes->add(
     'setting',
     new Route(
-        constant('URL_SUBFOLDER') . '/setting/{username}',
+        constant('URL_SUBFOLDER') . '/account/setting',
         array(
             'controller' => 'PageController',
             'method'=>'setting'
@@ -60,7 +48,7 @@ $routes->add(
 $routes->add(
     'login',
     new Route(
-        constant('URL_SUBFOLDER') . '/login',
+        constant('URL_SUBFOLDER') . '/account/login',
         array(
             'controller' => 'PageController',
             'method'=>'login'
@@ -72,12 +60,24 @@ $routes->add(
 $routes->add(
     'sign',
     new Route(
-        constant('URL_SUBFOLDER') . '/sign',
+        constant('URL_SUBFOLDER') . '/account/sign',
         array(
             'controller' => 'PageController',
             'method'=>'sign'
         ),
         array()
+    )
+);
+
+$routes->add(
+    'profile',
+    new Route(
+        constant('URL_SUBFOLDER') . '/profile/{username}',
+        array(
+            'controller' => 'PageController',
+            'method'=>'profile'
+        ),
+        array('username' => '^[A-Za-z0-9_]{1,9}$')
     )
 );
 
