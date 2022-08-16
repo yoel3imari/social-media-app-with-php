@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-abstract class Model
+interface Model
 {
-    abstract public function __get($prop);
-    abstract public function __set($prop, $value);
-    abstract public function create(array $data);
-    abstract public function read(int $id);
-    abstract public function update(int $id, array $data);
-    abstract public function delete(int $id);
+    public function __get($prop);
+    public function set(array $t);
+    public function create(array $data);
+    public function read(string $username, array $data);
+    public function update(string $id, array $data);
+    public function delete(string $id);
 }

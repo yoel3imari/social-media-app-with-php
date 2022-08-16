@@ -24,10 +24,12 @@ class Post implements Model
     /**
      * set a property in this object
      */
-    public function __set($prop, $value)
+    public function set(array $t, $non = "")
     {
-        if( property_exists($this, $prop) ){
-            $this->$prop = $value;
+        foreach ($t as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
         }
     }
 

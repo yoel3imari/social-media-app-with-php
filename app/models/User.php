@@ -2,60 +2,44 @@
 
 namespace App\Models;
 
-class User {
+use App\Models\Model;
+use App\Database\Db;
+
+
+class User implements Model
+{
     protected $name;
     protected $username;
     protected $bio;
     protected $password;
     protected $picture;
 
-    public function getName() {
-        return $this->name;
+    /**
+     * get a property from this object
+     * 
+     * @package User
+     */
+    public function __get($prop)
+    {
+        if (property_exists($this, $prop)) {
+            return $this->$prop;
+        }
     }
 
-    public function setName(string $name) {
-        $this->name = $name;
+    /**
+     * set a property in this object
+     * 
+     * @package Post
+     */
+    public function set(array $t)
+    {
+        foreach ($t as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
     }
 
-    //-------------
-
-    public function getUsername() {
-        return $this->username;
-    }
-
-    public function setUsername(string $username) {
-        $this->username = $username;
-    }
-
-    //-------------
-
-    public function getBio() {
-        return $this->bio;
-    }
-
-    public function setBio(string $bio) {
-        $this->bio = $bio;
-    }
-
-    //-------------
-
-    public function getPassword() {
-        return $this->password;
-    }
-
-    public function setPassword(string $password) {
-        $this->password = $password;
-    }
-
-    //-------------
-
-    public function getPicture() {
-        return $this->picture;
-    }
-
-    public function setPicture(string $picture) {
-        $this->picture = $picture;
-    }
 
     // CRUD OPERATIONS
     public function create(array $data)
@@ -63,18 +47,35 @@ class User {
         // create new user when signup
     }
 
-    public function read(string $username)
+    public function read(string $username, array $data)
     {
-        // get user by username
+        // get user by username and specific data
+        $db = new Db();
+        $cnn = $db->connect();
+
+        $wanted = "";
+        for ($i=0; $i < count($data); $i++) { 
+            if( $i == 0 )
+                $wanted .= $data[$i];
+            else
+                $wanted .= ", " . $data[$i];
+        }
+
+        $stmt = $cnn->prepare("SELECT username, " . $wanted . " FROM users WHERE username = :username");
+        $stmt->execute(["username" => $username]);
+        $result = $stmt->fetchAll();
+        if( count($result) == 0 ) {
+            return false;
+        }
+
+        return $result[0];
     }
 
     public function update(string $username, array $data)
     {
-
     }
 
     public function delete(string $username)
     {
-
     }
 }

@@ -83,4 +83,16 @@ $routes->add(
 
 // User Routing
 
+$routes->add(
+    'verify_login',
+    new Route(
+        constant('URL_SUBFOLDER') . '/account/login/user',
+        array(
+            'controller' => 'UserController',
+            'method'=>'login'
+        ),
+        array()
+    )
+);
+
 // Post Routing

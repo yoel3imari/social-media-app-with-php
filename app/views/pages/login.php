@@ -1,20 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="<?php echo URI_ROOT .  "public/style/style.css"; ?>">
     <title>IFriend - Login</title>
 </head>
+
 <body>
     <div class="wrapper">
-        <h1>IFriend</h1>
-        <h2>Login</h2>
+        <form action="<?php echo URI_ROOT . "account/login/user"; ?>" method="post">
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example1">Username</label>
+                <input type="text" name="username" id="form2Example1" autocomplete="off" class="form-control" />
+            </div>
+
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example2">Password</label>
+                <input type="password" name="password" id="form2Example2" autocomplete="off" class="form-control" />
+            </div>
+
+            <!-- 2 column grid layout for inline styling -->
+            <div class="mb-4 w-100">
+                <div class="col d-flex justify-content-start">
+                    <!-- Checkbox -->
+                    <div class="form-check">
+                        <input class="form-check-input" name="remember" type="checkbox" value="" id="form2Example31" checked />
+                        <label class="form-check-label" for="form2Example31"> Remember me </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4 w-100">Login</button>
+
+            <div class="col">
+                <!-- Simple link -->
+                <a href="#!">Forgot password?</a>
+            </div>
+            <!-- Register buttons -->
+            <div class="text-left w-100 mb-4">
+                <p>Not a member? <a href="#!">Register</a></p>
+            </div>
+            <?php
+            if (isset($_SESSION["error"])) {
+            ?>
+                <div class="error text-left w-100">
+                    <?php 
+                        echo  $_SESSION["error"];
+                        var_dump($_SESSION["data"]);
+                    ?>
+                </div>
+            <?php
+            }
+            ?>
+        </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
+
 </html>

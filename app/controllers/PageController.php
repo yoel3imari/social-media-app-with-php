@@ -5,14 +5,20 @@ namespace App\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\HttpFoundation\Request;
+use App\Utilities;
 
 class PageController
 {
     public function home(RouteCollection $routes)
     {
         # code...
-        require_once PAGE_PATH . 'home.php';
+        if (isset($_COOKIE["UID"])) {
+            require_once PAGE_PATH . 'home.php';
+            var_dump($_SESSION["current_user"]);
+            var_dump($_COOKIE["UID"]);
+        } else {
+            Utilities::getHimTo("account/login");
+        }
     }
 
     public function profile(string $username, RouteCollection $routes)
@@ -31,7 +37,6 @@ class PageController
 
     public function login(RouteCollection $routes)
     {
-        # edit user info
         require_once PAGE_PATH . 'login.php';
     }
 
