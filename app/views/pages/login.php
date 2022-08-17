@@ -14,15 +14,15 @@
     <div class="wrapper">
         <form action="<?php echo URI_ROOT . "account/login/user"; ?>" method="post">
             <!-- Email input -->
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example1">Username</label>
-                <input type="text" name="username" id="form2Example1" autocomplete="off" class="form-control" />
+            <div class="form-outline mb-4 row">
+                <label class="form-label col-3 me-4" for="form2Example1">Username</label>
+                <input type="text" name="username" id="form2Example1" autocomplete="off" class="form-control col" />
             </div>
 
             <!-- Password input -->
-            <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example2">Password</label>
-                <input type="password" name="password" id="form2Example2" autocomplete="off" class="form-control" />
+            <div class="form-outline mb-4 row">
+                <label class="form-label col-3 me-4" for="form2Example2">Password</label>
+                <input type="password" name="password" id="form2Example2" autocomplete="off" class="form-control col" />
             </div>
 
             <!-- 2 column grid layout for inline styling -->
@@ -46,16 +46,13 @@
             </div>
             <!-- Register buttons -->
             <div class="text-left w-100 mb-4">
-                <p>Not a member? <a href="#!">Register</a></p>
+                <p>Not a member? <a href="<?php echo URI_ROOT . "account/sign/user"; ?>">Register</a></p>
             </div>
             <?php
-            if (isset($_SESSION["error"])) {
+            if (isset($_SESSION["error"]) and !empty($_SESSION["error"])) {
             ?>
-                <div class="error text-left w-100">
-                    <?php 
-                        echo  $_SESSION["error"];
-                        var_dump($_SESSION["data"]);
-                    ?>
+                <div class="error bg-danger text-left w-100 py-2 px-3 text-white rounded-2">
+                    <?php echo $_SESSION["error"]; ?>
                 </div>
             <?php
             }

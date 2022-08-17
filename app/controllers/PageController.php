@@ -2,28 +2,28 @@
 
 namespace App\Controllers;
 
-use App\Models\Post;
 use App\Models\User;
 use Symfony\Component\Routing\RouteCollection;
-use App\Utilities;
 
 class PageController
 {
     public function home(RouteCollection $routes)
     {
         # code...
-        if (isset($_COOKIE["UID"])) {
+        $_SESSION["error"] = "";
+        if (isset($_COOKIE["UID"]) and !empty($_COOKIE["UID"])) {
+            $user = (User::get_instance())->read($_COOKIE["UID"], ["name", "bio", "age", "picture", "started_at"]);
+            var_dump($user);
             require_once PAGE_PATH . 'home.php';
-            var_dump($_SESSION["current_user"]);
-            var_dump($_COOKIE["UID"]);
         } else {
-            Utilities::getHimTo("account/login");
+            require_once PAGE_PATH . 'login.php';
         }
     }
 
     public function profile(string $username, RouteCollection $routes)
     {
         # code...
+        $_SESSION["error"] = "";
         var_dump($username);
         require_once PAGE_PATH . 'profile.php';
     }
@@ -31,18 +31,20 @@ class PageController
     public function setting(string $username, RouteCollection $routes)
     {
         # edit user info
+        $_SESSION["error"] = "";
         var_dump($username);
         require_once PAGE_PATH . 'setting.php';
     }
 
     public function login(RouteCollection $routes)
     {
+        $_SESSION["error"] = "";
         require_once PAGE_PATH . 'login.php';
     }
 
     public function sign(RouteCollection $routes)
     {
-        # edit user info
+        $_SESSION["error"] = "";
         require_once PAGE_PATH . 'sign.php';
     }
 }

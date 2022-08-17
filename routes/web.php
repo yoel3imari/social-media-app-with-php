@@ -41,7 +41,7 @@ $routes->add(
             'controller' => 'PageController',
             'method'=>'setting'
         ),
-        array('username' => '^[A-Za-z0-9_]{1,9}$')
+        array()
     )
 );
 
@@ -82,6 +82,18 @@ $routes->add(
 );
 
 // User Routing
+
+$routes->add(
+    'verify_sign',
+    new Route(
+        constant('URL_SUBFOLDER') . '/account/sign/user',
+        array(
+            'controller' => 'UserController',
+            'method'=>'sign'
+        ),
+        array()
+    )
+);
 
 $routes->add(
     'verify_login',

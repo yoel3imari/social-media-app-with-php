@@ -4,9 +4,15 @@ namespace App\Database;
 
 use PDO;
 use PDOException;
+use App\Traits\Singleton;
 
 class Db
 {
+    use Singleton;
+    //public static $cnn = null;
+    public function __construct()
+    {
+    }
 
     public function connect()
     {
